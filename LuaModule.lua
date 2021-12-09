@@ -39,11 +39,13 @@ do local strings = Lua.strings;
     return x
   end
   function strings.strip(s, t, n, a)
-    local x = string.rep("%s", ((t or 4) / 2))
-    return string.gsub(s:sub((n or 1)), t .. "\n",
+    local x = string.rep("%s", t or 1)
+    return string.gsub(s:sub((n or 1)), x .. "\n",
     function()
       return "\n"
     end, a or #s)
   end
+  
 end
+
 return Lua
