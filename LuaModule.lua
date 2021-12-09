@@ -45,7 +45,12 @@ do local strings = Lua.strings;
       return "\n"
     end, a or #s)
   end
-  
+  function strings.new(s)
+    local t = {["host"]=s}
+    local m = {}
+    for i, v in pairs(strings) do if i ~= "new" then m[i] = v end end
+    for i, v in pairs(m) do m[i] = function(...) return v(t.host, ...) end end
+  end
 end
 
 return Lua
