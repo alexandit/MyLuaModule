@@ -22,5 +22,21 @@ do local strings = Lua.strings;
       return s
     end
   end
+  function strings.whitespace(s, c, n)
+    return string.gsub(s, "%s",
+    function()
+      return string.format("%s", c or "")
+    end, n or #s)
+  end
+  function strings.toArray(s, m, n)
+    local a= m or 1
+    local c = a
+    local x = {}
+    repeat
+      x[a+1 - c] = string.sub(s, a, a)
+      a = a + 1
+    until a > (n or #s)
+    return x
+  end
 end
 return Lua
