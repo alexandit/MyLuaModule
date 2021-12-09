@@ -45,11 +45,54 @@ do local strings = Lua.strings;
       return "\n"
     end, a or #s)
   end
-  function strings.new(s)
-    local t = {["host"]=s}
-    local m = {}
-    for i, v in pairs(strings) do if i ~= "new" then m[i] = v end end
-    for i, v in pairs(m) do m[i] = function(...) return v(t.host, ...) end end
+end
+
+do local tables = Lua.tables
+  function tables.iCopy(t)
+    local x = {};
+    for i, v in ipairs(t) do
+      x[i] = v
+    end
+    return x
+  end
+  function tables.sCopy(t)
+    local x = {}
+    for i, v in pairs(t) do
+      if type(i) == "string" then
+        x[i] = v
+      end
+    end
+    return x
+  end
+  function tables.fullCopy(t)
+    local x = {}
+    for i, v in pairs(t) do
+      x[i] = v
+    end
+    return x
+  end
+  function tables.assign(h, t)
+    local x = t
+    local b = h
+    for i, v in pairs(x) do
+      b[i] = v
+    end
+    return b
+  end
+  function tables.getValue(t)
+    local x = 0
+    for _,_ in pairs(t) do x = x + 1 end
+    return x
+  end
+  function tables.getValueOfType(t, s)
+    local x = 0
+    if not s or type(s) ~= "string" then return nil end
+    for i, v in pairs(t) do
+      if type(v) == s then
+        x = x + 1
+      end
+    end
+    return x
   end
 end
 
