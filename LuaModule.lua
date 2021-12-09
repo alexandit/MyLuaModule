@@ -68,13 +68,6 @@ do local tables = Lua.tables
     end
     return x
   end
-  function tables.fullCopy(t)
-    local x = {}
-    for i, v in pairs(t) do
-      x[i] = v
-    end
-    return x
-  end
   function tables.assign(h, t)
     local x = t
     local b = h
