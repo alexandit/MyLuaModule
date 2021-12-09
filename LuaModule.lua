@@ -1,4 +1,8 @@
 local Lua = {}
+local import = function(x)
+  local s = x[1]
+  if Lua[tostring(s)] then return Lua[tostring(s)] end
+end
 
 Lua.strings = {}
 Lua.numbers = {}
@@ -96,4 +100,4 @@ do local tables = Lua.tables
   end
 end
 
-return Lua
+return import
