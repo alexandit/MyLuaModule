@@ -19,7 +19,7 @@ do local strings = Lua.strings;
     elseif m == "q2" then
       s = string.gsub("\\(%d%d%d)",
       function(c)
-        return string.format("\\(%d%d%d)", string.char(c))
+        return "\\" .. string.char(c)
       end)
     end
   end
