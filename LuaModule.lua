@@ -13,15 +13,19 @@ do local strings = Lua.strings;
   function strings.capitalize(s)
     return string.upper(s:sub(1,1)) .. s:sub(2)
   end
-  function strings.preprocess(s, m)
+  function strings.preprocess(s, m, cc)
     if m == "q1" then
-      s= string.gsub(s,"\\(\")", function(c)
+      s= string.gsub(s,"\\(" .. cc .. ")", function(c)
         return string.format("\\%03d", string.byte(c))
       end)
       return s
     elseif m == "q2" then
       s = string.gsub(s, "\\(%d%d%d)",function(c)
-        return "\\" .. string.char(c)
+        if string.char(c) == cc then
+          return "\\" .. string.char(c)
+        else
+          return "\\" .. string.format("\\(%03d", string.byte(c));
+        end
       end)
       return s
     end
